@@ -78,8 +78,11 @@ const ResumeClientForm = () => {
               onChange={handleInputChange}
             />
           </TwoInputs>
-          <div className="mt-5 text-right">
-            <Button label="Download" type="submit" />
+          <div className="mt-5 text-right hidden md:block">
+            <Button label="Download resume" />
+          </div>
+          <div className="mt-5 text-right  md:hidden">
+            <Button label="Preview resume" />
           </div>
         </div>
       </form>
