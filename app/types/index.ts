@@ -7,12 +7,14 @@ export type ClientDataType = {
   country?: string;
   email?: string;
   phone?: string;
+  //step 02: links
   links?: ClientDataLinkType[];
-  //step 02: education
+  //step 03: education
   education?: ClientDataEducationType[];
 };
 
-type ClientDataLinkType = {
+export type ClientDataLinkType = {
+  id?: string;
   url?: string;
   label?: string;
 };

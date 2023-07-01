@@ -77,11 +77,11 @@ const ResumePreview = () => {
       <h2 className="text-gray-500 text-sm">Resume Preview</h2>
       <canvas
         ref={canvasRef}
-        className="border border-gray-200 w-full rounded-lg max-h-[100%]"
+        className="border border-gray-200 w-full rounded-xl max-h-[100%]"
       />
 
       <div className="w-full text-right md:hidden">
-        <Button label="Download resume" />
+        <Button label="Download resume" bg="primary" />
       </div>
     </div>
   );

@@ -37,7 +37,7 @@ const InputField: React.FC<InputFieldProps> = ({
             bg-white
             w-full
             p-3
-            rounded-lg
+            rounded-xl
             border
             border-transparent
             focus:border-gray-300
