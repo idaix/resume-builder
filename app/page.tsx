@@ -1,14 +1,19 @@
 import Link from "next/link";
+import Button from "./components/Button";
+import HomeNav from "./components/HomeNav";
 
 export default function Home() {
   return (
-    <main className="h-full grid place-items-center">
-      <Link
-        className="py-2 px-5 bg-gradient-to-tr from-fuchsia-500 to-orange-400 rounded-lg font-semibold text-white"
+    <main className="h-full grid place-items-center text-gray-500">
+      <HomeNav />
+      <Button
+        asLink
         href="/create"
-      >
-        Get Started
-      </Link>
+        label="Get Started"
+        type="button"
+        bg="gradient"
+        size="large"
+      />
     </main>
   );
 }
