@@ -21,18 +21,7 @@ const ResumeAppProvider = ({ children }: { children: ReactNode }) => {
     email: "",
     phone: "",
     headline: "",
-    links: [
-      {
-        id: "1",
-        label: "LinkedIn",
-        url: "https://www.linkedin.com/in/daichekkal/",
-      },
-      {
-        id: "2",
-        label: "Github",
-        url: "https://github.com/daishek",
-      },
-    ],
+    links: [],
     education: [],
   });
   return (

@@ -5,6 +5,8 @@ import TwoInputs from "@/app/components/TwoInputs";
 import { useResumeAppContext } from "@/app/context/useResumeApp";
 import { ChangeEvent, useEffect, useState } from "react";
 import LinksBox from "./LinksBox";
+import { generateUniqueId } from "@/app/utils/functions";
+import { ClientDataLinkType } from "@/app/types";
 
 enum STEPS {
   PERSONAL = 0,
@@ -26,7 +28,7 @@ const ResumeClientForm = () => {
   const actionLabel = steps === STEPS.EDUCATION ? "Download Resume" : "Next";
   const actionLabelMobile =
     steps === STEPS.EDUCATION ? "Preview Resume" : "Next";
-  const secondaryActionLabel = steps === STEPS.EDUCATION ? undefined : "Back";
+  const secondaryActionLabel = steps === STEPS.PERSONAL ? undefined : "Back";
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,6 +37,26 @@ const ResumeClientForm = () => {
       [name]: value,
     });
   };
+
+  const emptyLink = {
+    id: generateUniqueId(),
+    label: "",
+    url: "",
+  };
+  const [newLink, setNewLink] = useState<ClientDataLinkType>(emptyLink);
+  const addNewLink = () => {
+    if (!newLink.label || !newLink.url) {
+      alert("empty links fields");
+      return;
+    }
+    setClientData({
+      ...clientData,
+      links: [...(clientData.links as []), newLink],
+    });
+
+    setNewLink(emptyLink);
+  };
+
   const handleClick = () => {
     actionLabel === "Next" && goForward();
   };
@@ -119,25 +141,32 @@ const ResumeClientForm = () => {
         <div className="grid grid-cols-4 gap-2">
           <div className="col-span-1">
             <InputField
-              id="linkLabel"
+              id="linkslabel"
               label="Label"
               placeholder="LinkedIn"
-              value={clientData.country}
-              onChange={handleInputChange}
+              value={newLink.label}
+              onChange={(e) =>
+                setNewLink((prevData) => ({
+                  ...prevData,
+                  label: e.target.value,
+                }))
+              }
             />
           </div>
           <div className="col-span-3">
             <InputField
-              id="linkUrl"
+              id="linksurl"
               label="Link"
               placeholder="https://www.linkedin.com/in/daichekkal/"
-              value={clientData.country}
-              onChange={handleInputChange}
+              value={newLink.url}
+              onChange={(e) =>
+                setNewLink((prevData) => ({ ...prevData, url: e.target.value }))
+              }
             />
           </div>
         </div>
         <div className="text-right">
-          <Button label="Add" bg="secondary" />
+          <Button label="Add" bg="secondary" onClick={addNewLink} />
         </div>
       </>
     );
@@ -154,7 +183,15 @@ const ResumeClientForm = () => {
       <form>
         <div className="grid gap-4 p-5">
           {bodyContent}
-          <div className="mt-5 text-right hidden md:block">
+          <div className="mt-5 text-right hidden md:block space-x-2">
+            {secondaryActionLabel && (
+              <Button
+                size="large"
+                bg="secondary"
+                label={secondaryActionLabel}
+                onClick={goBack}
+              />
+            )}
             <Button
               size="large"
               bg="primary"
